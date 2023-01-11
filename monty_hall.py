@@ -1,21 +1,19 @@
 #Monty Hall Problem 
 from random import shuffle, choice
 
-doors=[0,0,1]
-result_list=[]
 
-for i in range(1,100+1):
+doors=[0,0,1] #0: goat, 1:sportscar
+result = {'stay_to_win' : 0, 'move_to_win' : 0}
+iter_num = int(input("Enter some num(100-10000): "))
+
+for _ in range(iter_num):
     shuffle(doors)
-    result=choice(doors)
-    result_list.append(result)
+    user_choice=choice(doors)
 
-sportscar=result_list.count(1)
-sheep=result_list.count(0)
+    if user_choice == 0:
+        result['move_to_win'] += 1
+    else:
+        result['stay_to_win'] += 1
 
-sportscar_aval=sportscar/100
-sheep_aval=sheep/100
-
-print('스포츠를 선택할 확률은 !', end=' ')
-print(sportscar_aval)
-print('양을 선택할 확률은 !', end=' ')
-print(sheep_aval)
+    
+print("{} times run : stay-{stay_to_win} switch-{move-to-win}".format(iter_num, **result))
